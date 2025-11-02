@@ -3,109 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Puck Prophet</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Puck Prophet - Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Fira Code', monospace; background: #000; color: #00ff41; padding: 20px; }
-        h1 { text-align: center; margin-bottom: 30px; text-shadow: 0 0 20px #00ff41; }
-        .form { max-width: 900px; margin: 0 auto; background: #0a0a0a; padding: 30px; border: 2px solid #00ff41; border-radius: 8px; }
-        h3 { margin: 25px 0 15px; color: #00ff41; border-bottom: 1px solid #00ff41; padding-bottom: 5px; }
-        label { display: block; margin: 15px 0 5px; font-size: 0.9em; }
-        input, select, textarea { width: 100%; padding: 10px; background: #000; border: 1px solid #00ff41; color: #00ff41; font-family: 'Fira Code', monospace; border-radius: 4px; font-size: 0.95em; }
+        body { font-family: 'Inter', sans-serif; background: #0f0f0f; color: #e5e5e5; }
+        .header { background: linear-gradient(135deg, #1a1a1a 0%, #2d1b1b 100%); padding: 20px 40px; border-bottom: 1px solid #333; }
+        h1 { font-size: 1.8em; font-weight: 700; color: #fff; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 30px 20px; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 30px; border-bottom: 1px solid #333; }
+        .tab { padding: 12px 24px; background: transparent; border: none; color: #888; font-weight: 600; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.3s; }
+        .tab.active { color: #e74c3c; border-bottom-color: #e74c3c; }
+        .section { display: none; }
+        .section.active { display: block; }
+        .form-card { background: #1a1a1a; border: 1px solid #333; border-radius: 12px; padding: 30px; margin-bottom: 20px; }
+        h2 { font-size: 1.5em; margin-bottom: 20px; color: #fff; }
+        h3 { font-size: 1.2em; margin: 20px 0 15px; color: #e74c3c; }
+        label { display: block; margin: 12px 0 6px; font-size: 0.9em; color: #aaa; font-weight: 500; }
+        input, select, textarea { width: 100%; padding: 12px; background: #0f0f0f; border: 1px solid #333; color: #e5e5e5; font-family: 'Inter', sans-serif; border-radius: 8px; font-size: 0.95em; transition: border-color 0.3s; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: #e74c3c; }
         textarea { min-height: 80px; resize: vertical; }
         .row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
-        button { width: 100%; padding: 15px; margin-top: 20px; background: #00ff41; color: #000; border: none; font-family: 'Fira Code', monospace; font-weight: bold; font-size: 1.1em; cursor: pointer; border-radius: 4px; transition: all 0.3s; }
-        button:hover { background: #00cc33; transform: translateY(-2px); }
-        .status-btns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 10px 0; }
-        .status-btns button { padding: 10px; margin: 0; background: #000; border: 1px solid #00ff41; color: #00ff41; font-size: 0.9em; }
-        .status-btns button.active { background: #00ff41; color: #000; }
-        .games-list { max-width: 900px; margin: 30px auto; }
-        .game-item { background: #0a0a0a; border: 1px solid #00ff41; padding: 15px; margin-bottom: 10px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
-        .delete-btn { background: #ff4136; color: #fff; padding: 8px 20px; margin: 0; width: auto; }
-        .preview { margin-top: 15px; padding: 10px; background: #000; border: 1px solid #00ff41; border-radius: 4px; display: none; }
-        .preview img { max-width: 60px; border-radius: 50%; border: 2px solid #00ff41; }
-        .helper { font-size: 0.8em; opacity: 0.6; margin-top: 5px; }
+        button { padding: 14px 28px; background: #e74c3c; color: #fff; border: none; font-family: 'Inter', sans-serif; font-weight: 600; cursor: pointer; border-radius: 8px; font-size: 0.95em; transition: all 0.3s; }
+        button:hover { background: #c0392b; transform: translateY(-1px); }
+        .btn-secondary { background: #2c3e50; }
+        .btn-secondary:hover { background: #34495e; }
+        .game-list { display: grid; gap: 15px; }
+        .game-item { background: #1a1a1a; border: 1px solid #333; border-radius: 10px; padding: 20px; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s; }
+        .game-item:hover { border-color: #e74c3c; transform: translateY(-2px); }
+        .game-info h4 { color: #fff; margin-bottom: 5px; }
+        .game-info p { color: #888; font-size: 0.9em; }
+        .game-actions { display: flex; gap: 10px; }
+        .preview { margin-top: 12px; padding: 12px; background: #0f0f0f; border: 1px solid #333; border-radius: 8px; display: none; align-items: center; gap: 12px; }
+        .preview img { width: 50px; height: 50px; border-radius: 50%; border: 2px solid #e74c3c; }
+        .helper { font-size: 0.85em; color: #666; margin-top: 5px; }
     </style>
 </head>
 <body>
-    <h1>🏒 ADMIN PANEL</h1>
-    <div class="form">
-        <h2>Add Game</h2>
-        <label>Game Date</label>
-        <input type="date" id="gameDate">
-        <label>Game Time (ET)</label>
-        <input type="time" id="gameTime">
-        <label>Venue</label>
-        <input type="text" id="venue" placeholder="TD Garden">
-        
-        <h3>🚀 Away Team</h3>
-        <label>Select Team</label>
-        <select id="awayTeamSelect" onchange="loadAwayTeam()"><option value="">-- Select Team --</option></select>
-        <div id="awayTeamPreview" class="preview"></div>
-        <label>Select Goalie</label>
-        <select id="awayGoalieSelect" onchange="loadAwayGoalie()"><option value="">-- Select Goalie --</option></select>
-        <div id="awayGoaliePreview" class="preview"></div>
-        <label>Status</label>
-        <div class="status-btns">
-            <button type="button" class="status-btn away-status active" data-status="CONFIRMED">CONFIRMED</button>
-            <button type="button" class="status-btn away-status" data-status="PROBABLE">PROBABLE</button>
-            <button type="button" class="status-btn away-status" data-status="LIKELY">LIKELY</button>
-        </div>
-        <div class="row3">
-            <div><label>Wins</label><input type="number" id="awayWins" value="0" min="0"></div>
-            <div><label>Losses</label><input type="number" id="awayLosses" value="0" min="0"></div>
-            <div><label>OTL</label><input type="number" id="awayOTL" value="0" min="0"></div>
-        </div>
-        <div class="row">
-            <div><label>GAA</label><input type="number" step="0.01" id="awayGAA" value="2.50"></div>
-            <div><label>SV%</label><input type="number" step="0.001" id="awaySV" value="0.915"></div>
-        </div>
-        <label>Shutouts</label><input type="number" id="awaySO" value="0" min="0">
-        <label>Win Probability (%)</label><input type="number" id="awayWinProb" value="50" min="0" max="100">
-        <label>Projected Saves</label><input type="number" id="awayProjSaves" value="25">
-        <label>Confirmation Tweet URL (optional)</label><input type="url" id="awayTweetURL" placeholder="https://twitter.com/...">
-        <label>Confirmation Text (optional)</label><textarea id="awayConfirmText" placeholder="Confirmed by coach..."></textarea>
-        
-        <h3>🏠 Home Team</h3>
-        <label>Select Team</label>
-        <select id="homeTeamSelect" onchange="loadHomeTeam()"><option value="">-- Select Team --</option></select>
-        <div id="homeTeamPreview" class="preview"></div>
-        <label>Select Goalie</label>
-        <select id="homeGoalieSelect" onchange="loadHomeGoalie()"><option value="">-- Select Goalie --</option></select>
-        <div id="homeGoaliePreview" class="preview"></div>
-        <label>Status</label>
-        <div class="status-btns">
-            <button type="button" class="status-btn home-status active" data-status="CONFIRMED">CONFIRMED</button>
-            <button type="button" class="status-btn home-status" data-status="PROBABLE">PROBABLE</button>
-            <button type="button" class="status-btn home-status" data-status="LIKELY">LIKELY</button>
-        </div>
-        <div class="row3">
-            <div><label>Wins</label><input type="number" id="homeWins" value="0" min="0"></div>
-            <div><label>Losses</label><input type="number" id="homeLosses" value="0" min="0"></div>
-            <div><label>OTL</label><input type="number" id="homeOTL" value="0" min="0"></div>
-        </div>
-        <div class="row">
-            <div><label>GAA</label><input type="number" step="0.01" id="homeGAA" value="2.50"></div>
-            <div><label>SV%</label><input type="number" step="0.001" id="homeSV" value="0.915"></div>
-        </div>
-        <label>Shutouts</label><input type="number" id="homeSO" value="0" min="0">
-        <label>Win Probability (%)</label><input type="number" id="homeWinProb" value="50" min="0" max="100">
-        <label>Projected Saves</label><input type="number" id="homeProjSaves" value="25">
-        <label>Confirmation Tweet URL (optional)</label><input type="url" id="homeTweetURL" placeholder="https://twitter.com/...">
-        <label>Confirmation Text (optional)</label><textarea id="homeConfirmText" placeholder="Confirmed by coach..."></textarea>
-        
-        <h3>💰 Polymarket</h3>
-        <label>Polymarket Market ID</label><input type="text" id="polyMarketId" placeholder="nhl-chi-edm-2025-11-01">
-        <div class="helper">Get this from the Polymarket URL after /market/</div>
-        <label>Away Team Win Odds (%)</label><input type="number" id="awayOdds" value="50" min="0" max="100" oninput="autoCalcOdds('away')">
-        <label>Home Team Win Odds (%)</label><input type="number" id="homeOdds" value="50" min="0" max="100" oninput="autoCalcOdds('home')">
-        <label>Analysis</label><textarea id="analysis" placeholder="Your betting analysis..."></textarea>
-        <label>Recommendation</label><input type="text" id="recommendation" placeholder="UNDERVALUED - Bet Away ML">
-        <button onclick="addGame()">ADD GAME</button>
+    <div class="header">
+        <h1>🏒 Puck Prophet Admin</h1>
     </div>
-    <div class="games-list"><h2>Current Games</h2><div id="gamesList"></div></div>
+    
+    <div class="container">
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('schedule')">Schedule Editor</button>
+            <button class="tab" onclick="showTab('pending')">Pending Games</button>
+            <button class="tab" onclick="showTab('live')">Live Games</button>
+        </div>
+        
+        <!-- SCHEDULE EDITOR -->
+        <div class="section active" id="schedule">
+            <div class="form-card">
+                <h2>Add Game to Schedule</h2>
+                <label>Date</label>
+                <select id="schedDate">
+                    <option value="today">Today</option>
+                    <option value="tomorrow">Tomorrow</option>
+                </select>
+                <label>Time (ET)</label>
+                <input type="time" id="schedTime">
+                <label>Venue</label>
+                <input type="text" id="schedVenue" placeholder="TD Garden">
+                <div class="row">
+                    <div>
+                        <label>Away Team</label>
+                        <select id="schedAwayTeam"><option value="">Select Team</option></select>
+                    </div>
+                    <div>
+                        <label>Home Team</label>
+                        <select id="schedHomeTeam"><option value="">Select Team</option></select>
+                    </div>
+                </div>
+                <button onclick="addToSchedule()">ADD TO SCHEDULE</button>
+            </div>
+            <h2>Today's Schedule</h2>
+            <div class="game-list" id="todayList"></div>
+            <h2 style="margin-top: 30px;">Tomorrow's Schedule</h2>
+            <div class="game-list" id="tomorrowList"></div>
+        </div>
+        
+        <!-- PENDING GAMES -->
+        <div class="section" id="pending">
+            <div class="game-list" id="pendingList"></div>
+        </div>
+        
+        <!-- LIVE GAMES (HOMEPAGE) -->
+        <div class="section" id="live">
+            <div class="form-card" id="homepageForm" style="display:none;">
+                <h2>Add Goalie Details</h2>
+                <div id="gameBasicInfo"></div>
+                <h3>Away Goalie</h3>
+                <label>Select Goalie</label>
+                <select id="awayGoalieSelect"><option value="">Select</option></select>
+                <div id="awayGoaliePreview" class="preview"></div>
+                <label>Status</label>
+                <select id="awayStatus">
+                    <option value="CONFIRMED">CONFIRMED</option>
+                    <option value="PROBABLE">PROBABLE</option>
+                    <option value="LIKELY">LIKELY</option>
+                </select>
+                <div class="row3">
+                    <div><label>W</label><input type="number" id="awayW" value="0"></div>
+                    <div><label>L</label><input type="number" id="awayL" value="0"></div>
+                    <div><label>OTL</label><input type="number" id="awayOTL" value="0"></div>
+                </div>
+                <div class="row">
+                    <div><label>GAA</label><input type="number" step="0.01" id="awayGAA" value="2.50"></div>
+                    <div><label>SV%</label><input type="number" step="0.001" id="awaySV" value="0.915"></div>
+                </div>
+                <label>SO</label><input type="number" id="awaySO" value="0">
+                <label>Win Prob (%)</label><input type="number" id="awayWinProb" value="50" oninput="autoCalcProb()">
+                <label>Proj Saves</label><input type="number" id="awayProjSaves" value="25">
+                <label>Confirmation Tweet</label><input type="url" id="awayTweet" placeholder="https://twitter.com/...">
+                <label>Confirmation Text</label><textarea id="awayConfirm" placeholder="Confirmed by coach..."></textarea>
+                
+                <h3>Home Goalie</h3>
+                <label>Select Goalie</label>
+                <select id="homeGoalieSelect"><option value="">Select</option></select>
+                <div id="homeGoaliePreview" class="preview"></div>
+                <label>Status</label>
+                <select id="homeStatus">
+                    <option value="CONFIRMED">CONFIRMED</option>
+                    <option value="PROBABLE">PROBABLE</option>
+                    <option value="LIKELY">LIKELY</option>
+                </select>
+                <div class="row3">
+                    <div><label>W</label><input type="number" id="homeW" value="0"></div>
+                    <div><label>L</label><input type="number" id="homeL" value="0"></div>
+                    <div><label>OTL</label><input type="number" id="homeOTL" value="0"></div>
+                </div>
+                <div class="row">
+                    <div><label>GAA</label><input type="number" step="0.01" id="homeGAA" value="2.50"></div>
+                    <div><label>SV%</label><input type="number" step="0.001" id="homeSV" value="0.915"></div>
+                </div>
+                <label>SO</label><input type="number" id="homeSO" value="0">
+                <label>Win Prob (%)</label><input type="number" id="homeWinProb" value="50">
+                <label>Proj Saves</label><input type="number" id="homeProjSaves" value="25">
+                <label>Confirmation Tweet</label><input type="url" id="homeTweet" placeholder="https://twitter.com/...">
+                <label>Confirmation Text</label><textarea id="homeConfirm" placeholder="Confirmed by coach..."></textarea>
+                
+                <h3>Polymarket</h3>
+                <label>Market ID</label><input type="text" id="polyMarket" placeholder="nhl-chi-edm-2025-11-01">
+                <div class="row">
+                    <div><label>Away Odds %</label><input type="number" id="awayOdds" value="50" oninput="autoCalcOdds()"></div>
+                    <div><label>Home Odds %</label><input type="number" id="homeOdds" value="50"></div>
+                </div>
+                <label>Analysis</label><textarea id="analysis" placeholder="Your analysis..."></textarea>
+                <label>Recommendation</label><input type="text" id="recommendation" placeholder="UNDERVALUED - Bet Away">
+                <button onclick="publishToHomepage()">PUBLISH TO HOMEPAGE</button>
+            </div>
+            <div class="game-list" id="liveList"></div>
+        </div>
+    </div>
 
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
@@ -123,130 +173,232 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
-        let teams = {}, currentGames = [], awayStatus = 'CONFIRMED', homeStatus = 'CONFIRMED';
+        let teams = {}, schedule = [], liveGames = [], editingGame = null;
 
         fetch('nhl-teams.json').then(r => r.json()).then(data => {
             teams = data.teams;
             Object.keys(teams).sort().forEach(abbrev => {
-                document.getElementById('awayTeamSelect').innerHTML += `<option value="${abbrev}">${teams[abbrev].name}</option>`;
-                document.getElementById('homeTeamSelect').innerHTML += `<option value="${abbrev}">${teams[abbrev].name}</option>`;
+                const opt = `<option value="${abbrev}">${teams[abbrev].name}</option>`;
+                document.getElementById('schedAwayTeam').innerHTML += opt;
+                document.getElementById('schedHomeTeam').innerHTML += opt;
             });
         });
 
-        window.loadAwayTeam = () => {
-            const abbrev = document.getElementById('awayTeamSelect').value;
-            if (!abbrev) return;
-            const team = teams[abbrev];
-            document.getElementById('awayTeamPreview').style.display = 'block';
-            document.getElementById('awayTeamPreview').innerHTML = `<img src="${team.logo}"> ${team.name}`;
-            document.getElementById('awayGoalieSelect').innerHTML = '<option value="">-- Select Goalie --</option>';
-            team.goalies.forEach((g, i) => document.getElementById('awayGoalieSelect').innerHTML += `<option value="${i}">${g.name} #${g.number}</option>`);
+        onValue(ref(db, 'schedule'), snap => { schedule = snap.val() || []; renderSchedule(); });
+        onValue(ref(db, 'games'), snap => { liveGames = (snap.val() || {}).games || []; renderLive(); });
+
+        window.showTab = (tab) => {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById(tab).classList.add('active');
         };
 
-        window.loadHomeTeam = () => {
-            const abbrev = document.getElementById('homeTeamSelect').value;
-            if (!abbrev) return;
-            const team = teams[abbrev];
-            document.getElementById('homeTeamPreview').style.display = 'block';
-            document.getElementById('homeTeamPreview').innerHTML = `<img src="${team.logo}"> ${team.name}`;
-            document.getElementById('homeGoalieSelect').innerHTML = '<option value="">-- Select Goalie --</option>';
-            team.goalies.forEach((g, i) => document.getElementById('homeGoalieSelect').innerHTML += `<option value="${i}">${g.name} #${g.number}</option>`);
+        window.addToSchedule = async () => {
+            const awayAbbrev = document.getElementById('schedAwayTeam').value;
+            const homeAbbrev = document.getElementById('schedHomeTeam').value;
+            if (!awayAbbrev || !homeAbbrev) return alert('Select teams');
+            
+            const date = document.getElementById('schedDate').value === 'today' ? new Date().toISOString().split('T')[0] : 
+                new Date(Date.now() + 86400000).toISOString().split('T')[0];
+            
+            schedule.push({
+                id: Date.now(),
+                date,
+                time: document.getElementById('schedTime').value,
+                venue: document.getElementById('schedVenue').value,
+                away: { abbrev: awayAbbrev, name: teams[awayAbbrev].name, logo: teams[awayAbbrev].logo },
+                home: { abbrev: homeAbbrev, name: teams[homeAbbrev].name, logo: teams[homeAbbrev].logo }
+            });
+            await set(ref(db, 'schedule'), schedule);
+            alert('Added to schedule!');
         };
 
-        window.loadAwayGoalie = () => {
-            const abbrev = document.getElementById('awayTeamSelect').value, idx = document.getElementById('awayGoalieSelect').value;
-            if (!abbrev || idx === '') return;
-            const g = teams[abbrev].goalies[idx];
-            document.getElementById('awayGoaliePreview').style.display = 'block';
-            document.getElementById('awayGoaliePreview').innerHTML = `<img src="${g.img}"> ${g.name} #${g.number}`;
+        function renderSchedule() {
+            const today = new Date().toISOString().split('T')[0];
+            const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+            
+            const todayGames = schedule.filter(g => g.date === today);
+            const tomorrowGames = schedule.filter(g => g.date === tomorrow);
+            
+            document.getElementById('todayList').innerHTML = todayGames.map(g => `
+                <div class="game-item">
+                    <div class="game-info">
+                        <h4>${g.away.abbrev} @ ${g.home.abbrev}</h4>
+                        <p>${g.time} - ${g.venue}</p>
+                    </div>
+                    <div class="game-actions">
+                        <button onclick="moveToHomepage(${g.id})">ADD TO HOMEPAGE</button>
+                        <button class="btn-secondary" onclick="deleteScheduled(${g.id})">DELETE</button>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('tomorrowList').innerHTML = tomorrowGames.map(g => `
+                <div class="game-item">
+                    <div class="game-info">
+                        <h4>${g.away.abbrev} @ ${g.home.abbrev}</h4>
+                        <p>${g.time} - ${g.venue}</p>
+                    </div>
+                    <div class="game-actions">
+                        <button onclick="moveToHomepage(${g.id})">ADD TO HOMEPAGE</button>
+                        <button class="btn-secondary" onclick="deleteScheduled(${g.id})">DELETE</button>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('pendingList').innerHTML = todayGames.map(g => `
+                <div class="game-item">
+                    <div class="game-info">
+                        <h4>${g.away.abbrev} @ ${g.home.abbrev}</h4>
+                        <p>${g.time} - ${g.venue}</p>
+                    </div>
+                    <button onclick="moveToHomepage(${g.id})">ADD TO HOMEPAGE</button>
+                </div>
+            `).join('');
+        }
+
+        window.moveToHomepage = (gameId) => {
+            editingGame = schedule.find(g => g.id === gameId);
+            document.getElementById('homepageForm').style.display = 'block';
+            document.getElementById('gameBasicInfo').innerHTML = `<p style="color:#888;">${editingGame.away.abbrev} @ ${editingGame.home.abbrev} - ${editingGame.time}</p>`;
+            
+            const awaySelect = document.getElementById('awayGoalieSelect');
+            const homeSelect = document.getElementById('homeGoalieSelect');
+            awaySelect.innerHTML = '<option value="">Select</option>';
+            homeSelect.innerHTML = '<option value="">Select</option>';
+            
+            teams[editingGame.away.abbrev].goalies.forEach((g, i) => {
+                awaySelect.innerHTML += `<option value="${i}">${g.name} #${g.number}</option>`;
+            });
+            teams[editingGame.home.abbrev].goalies.forEach((g, i) => {
+                homeSelect.innerHTML += `<option value="${i}">${g.name} #${g.number}</option>`;
+            });
+            
+            awaySelect.onchange = () => {
+                const idx = awaySelect.value;
+                if (idx === '') return;
+                const g = teams[editingGame.away.abbrev].goalies[idx];
+                document.getElementById('awayGoaliePreview').style.display = 'flex';
+                document.getElementById('awayGoaliePreview').innerHTML = `<img src="${g.img}"> ${g.name} #${g.number}`;
+            };
+            
+            homeSelect.onchange = () => {
+                const idx = homeSelect.value;
+                if (idx === '') return;
+                const g = teams[editingGame.home.abbrev].goalies[idx];
+                document.getElementById('homeGoaliePreview').style.display = 'flex';
+                document.getElementById('homeGoaliePreview').innerHTML = `<img src="${g.img}"> ${g.name} #${g.number}`;
+            };
+            
+            showTab('live');
+            document.querySelectorAll('.tab')[2].classList.add('active');
         };
 
-        window.loadHomeGoalie = () => {
-            const abbrev = document.getElementById('homeTeamSelect').value, idx = document.getElementById('homeGoalieSelect').value;
-            if (!abbrev || idx === '') return;
-            const g = teams[abbrev].goalies[idx];
-            document.getElementById('homeGoaliePreview').style.display = 'block';
-            document.getElementById('homeGoaliePreview').innerHTML = `<img src="${g.img}"> ${g.name} #${g.number}`;
-        };
-
-        document.querySelectorAll('.status-btn').forEach(btn => btn.onclick = function() {
-            const group = this.classList.contains('away-status') ? '.away-status' : '.home-status';
-            document.querySelectorAll(group).forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            if (this.classList.contains('away-status')) awayStatus = this.dataset.status;
-            else homeStatus = this.dataset.status;
-        });
-
-        window.autoCalcOdds = (changed) => {
+        window.autoCalcOdds = () => {
             const away = parseInt(document.getElementById('awayOdds').value) || 0;
-            if (changed === 'away') document.getElementById('homeOdds').value = 100 - away;
-            else document.getElementById('awayOdds').value = 100 - (parseInt(document.getElementById('homeOdds').value) || 0);
+            document.getElementById('homeOdds').value = 100 - away;
         };
 
-        window.addGame = async () => {
-            const awayAbbrev = document.getElementById('awayTeamSelect').value, homeAbbrev = document.getElementById('homeTeamSelect').value;
-            const awayIdx = document.getElementById('awayGoalieSelect').value, homeIdx = document.getElementById('homeGoalieSelect').value;
-            if (!awayAbbrev || !homeAbbrev || awayIdx === '' || homeIdx === '') return alert('Select teams and goalies');
+        window.autoCalcProb = () => {
+            const away = parseInt(document.getElementById('awayWinProb').value) || 0;
+            document.getElementById('homeWinProb').value = 100 - away;
+        };
+
+        window.publishToHomepage = async () => {
+            const awayIdx = document.getElementById('awayGoalieSelect').value;
+            const homeIdx = document.getElementById('homeGoalieSelect').value;
+            if (awayIdx === '' || homeIdx === '') return alert('Select goalies');
             
             const game = {
-                gameId: `m-${Date.now()}`,
-                gameDate: document.getElementById('gameDate').value,
-                gameTime: document.getElementById('gameTime').value,
-                venue: document.getElementById('venue').value,
+                gameId: editingGame.id,
+                gameDate: editingGame.date,
+                gameTime: editingGame.time,
+                venue: editingGame.venue,
                 away: {
-                    team: teams[awayAbbrev].name, teamAbbrev: awayAbbrev, teamLogo: teams[awayAbbrev].logo,
+                    team: editingGame.away.name,
+                    teamAbbrev: editingGame.away.abbrev,
+                    teamLogo: editingGame.away.logo,
                     goalie: {
-                        name: teams[awayAbbrev].goalies[awayIdx].name, number: teams[awayAbbrev].goalies[awayIdx].number,
-                        status: awayStatus, headshot: teams[awayAbbrev].goalies[awayIdx].img,
+                        name: teams[editingGame.away.abbrev].goalies[awayIdx].name,
+                        number: teams[editingGame.away.abbrev].goalies[awayIdx].number,
+                        status: document.getElementById('awayStatus').value,
+                        headshot: teams[editingGame.away.abbrev].goalies[awayIdx].img,
                         stats: {
-                            record: `${document.getElementById('awayWins').value}-${document.getElementById('awayLosses').value}-${document.getElementById('awayOTL').value}`,
-                            gaa: parseFloat(document.getElementById('awayGAA').value), savePct: parseFloat(document.getElementById('awaySV').value),
-                            shutouts: parseInt(document.getElementById('awaySO').value), winProb: parseInt(document.getElementById('awayWinProb').value),
+                            record: `${document.getElementById('awayW').value}-${document.getElementById('awayL').value}-${document.getElementById('awayOTL').value}`,
+                            gaa: parseFloat(document.getElementById('awayGAA').value),
+                            savePct: parseFloat(document.getElementById('awaySV').value),
+                            shutouts: parseInt(document.getElementById('awaySO').value),
+                            winProb: parseInt(document.getElementById('awayWinProb').value),
                             projSaves: parseInt(document.getElementById('awayProjSaves').value)
                         },
-                        confirmationTweet: document.getElementById('awayTweetURL').value, confirmationText: document.getElementById('awayConfirmText').value
+                        confirmationTweet: document.getElementById('awayTweet').value,
+                        confirmationText: document.getElementById('awayConfirm').value
                     }
                 },
                 home: {
-                    team: teams[homeAbbrev].name, teamAbbrev: homeAbbrev, teamLogo: teams[homeAbbrev].logo,
+                    team: editingGame.home.name,
+                    teamAbbrev: editingGame.home.abbrev,
+                    teamLogo: editingGame.home.logo,
                     goalie: {
-                        name: teams[homeAbbrev].goalies[homeIdx].name, number: teams[homeAbbrev].goalies[homeIdx].number,
-                        status: homeStatus, headshot: teams[homeAbbrev].goalies[homeIdx].img,
+                        name: teams[editingGame.home.abbrev].goalies[homeIdx].name,
+                        number: teams[editingGame.home.abbrev].goalies[homeIdx].number,
+                        status: document.getElementById('homeStatus').value,
+                        headshot: teams[editingGame.home.abbrev].goalies[homeIdx].img,
                         stats: {
-                            record: `${document.getElementById('homeWins').value}-${document.getElementById('homeLosses').value}-${document.getElementById('homeOTL').value}`,
-                            gaa: parseFloat(document.getElementById('homeGAA').value), savePct: parseFloat(document.getElementById('homeSV').value),
-                            shutouts: parseInt(document.getElementById('homeSO').value), winProb: parseInt(document.getElementById('homeWinProb').value),
+                            record: `${document.getElementById('homeW').value}-${document.getElementById('homeL').value}-${document.getElementById('homeOTL').value}`,
+                            gaa: parseFloat(document.getElementById('homeGAA').value),
+                            savePct: parseFloat(document.getElementById('homeSV').value),
+                            shutouts: parseInt(document.getElementById('homeSO').value),
+                            winProb: parseInt(document.getElementById('homeWinProb').value),
                             projSaves: parseInt(document.getElementById('homeProjSaves').value)
                         },
-                        confirmationTweet: document.getElementById('homeTweetURL').value, confirmationText: document.getElementById('homeConfirmText').value
+                        confirmationTweet: document.getElementById('homeTweet').value,
+                        confirmationText: document.getElementById('homeConfirm').value
                     }
                 },
                 polymarket: {
-                    marketId: document.getElementById('polyMarketId').value, awayWinOdds: parseInt(document.getElementById('awayOdds').value),
-                    homeWinOdds: parseInt(document.getElementById('homeOdds').value), analysis: document.getElementById('analysis').value,
+                    marketId: document.getElementById('polyMarket').value,
+                    awayWinOdds: parseInt(document.getElementById('awayOdds').value),
+                    homeWinOdds: parseInt(document.getElementById('homeOdds').value),
+                    analysis: document.getElementById('analysis').value,
                     recommendation: document.getElementById('recommendation').value
                 }
             };
-            currentGames.push(game);
-            await set(ref(db, 'games'), { timestamp: new Date().toISOString(), games: currentGames });
-            alert('Game added! ✅');
+            
+            liveGames.push(game);
+            await set(ref(db, 'games'), { timestamp: new Date().toISOString(), games: liveGames });
+            schedule = schedule.filter(g => g.id !== editingGame.id);
+            await set(ref(db, 'schedule'), schedule);
+            alert('Published to homepage!');
+            document.getElementById('homepageForm').style.display = 'none';
         };
 
-        onValue(ref(db, 'games'), snap => {
-            const data = snap.val() || {};
-            currentGames = data.games || [];
-            document.getElementById('gamesList').innerHTML = currentGames.length === 0 ? '<p style="text-align:center;opacity:0.5;">No games yet</p>' :
-                currentGames.map((g, i) => `<div class="game-item"><div><strong>${g.away.teamAbbrev} @ ${g.home.teamAbbrev}</strong><div style="font-size:0.9em;opacity:0.8;">${g.gameDate} ${g.gameTime}</div></div><button class="delete-btn" onclick="deleteGame(${i})">DELETE</button></div>`).join('');
-        });
+        function renderLive() {
+            document.getElementById('liveList').innerHTML = liveGames.map((g, i) => `
+                <div class="game-item">
+                    <div class="game-info">
+                        <h4>${g.away.teamAbbrev} @ ${g.home.teamAbbrev}</h4>
+                        <p>${g.gameTime} - ${g.venue}</p>
+                    </div>
+                    <button class="btn-secondary" onclick="deleteLive(${i})">DELETE</button>
+                </div>
+            `).join('');
+        }
 
-        window.deleteGame = async (i) => {
+        window.deleteScheduled = async (id) => {
             if (confirm('Delete?')) {
-                currentGames.splice(i, 1);
-                await set(ref(db, 'games'), { timestamp: new Date().toISOString(), games: currentGames });
+                schedule = schedule.filter(g => g.id !== id);
+                await set(ref(db, 'schedule'), schedule);
             }
         };
 
-        document.getElementById('gameDate').valueAsDate = new Date();
+        window.deleteLive = async (idx) => {
+            if (confirm('Remove from homepage?')) {
+                liveGames.splice(idx, 1);
+                await set(ref(db, 'games'), { timestamp: new Date().toISOString(), games: liveGames });
+            }
+        };
     </script>
 </body>
 </html>
