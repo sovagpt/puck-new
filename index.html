@@ -126,6 +126,7 @@
                         </div>
                     </div>
                     <div class="prob-bars">
+                        <h3 style="margin-bottom: 15px; text-align: center; color: #00ff41; border-bottom: 1px solid #00ff41; padding-bottom: 10px;">📊 PROJECTIONS</h3>
                         <div class="prob-bar">
                             <div class="prob-label"><span>${g.away.teamAbbrev} Win Probability</span><strong>${g.away.goalie.stats.winProb}%</strong></div>
                             <div class="bar"><div class="bar-fill" style="width:${g.away.goalie.stats.winProb}%"></div></div>
@@ -144,6 +145,7 @@
                         </div>
                     </div>
                     <div class="polymarket-section">
+                        <h3 style="margin-bottom: 15px; text-align: center; color: #00ff41; font-size: 1.2em;">🤖 PUCK PROPHET AGENT PREDICTION</h3>
                         ${g.polymarket.marketId ? `
                             <div class="poly-embed">
                                 <iframe title="polymarket-embed" src="https://embed.polymarket.com/market.html?market=${g.polymarket.marketId}&features=volume&theme=dark" width="100%" height="180" frameBorder="0"></iframe>
