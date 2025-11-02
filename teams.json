@@ -1,0 +1,87 @@
+{
+  "teams": [
+    {
+      "name": "Boston Bruins",
+      "abbrev": "BOS",
+      "logo": "https://public-ds.static.dobbersports.com/team-logo/dark/6.png",
+      "goalies": [
+        {"name": "Jeremy Swayman", "number": 1, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8476945.png"},
+        {"name": "Joonas Korpisalo", "number": 70, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8476883.png"}
+      ]
+    },
+    {
+      "name": "Carolina Hurricanes",
+      "abbrev": "CAR",
+      "logo": "https://public-ds.static.dobbersports.com/team-logo/dark/12.png",
+      "goalies": [
+        {"name": "Frederik Andersen", "number": 31, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8475883.png"},
+        {"name": "Pyotr Kochetkov", "number": 52, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8478492.png"}
+      ]
+    },
+    {
+      "name": "Tampa Bay Lightning",
+      "abbrev": "TBL",
+      "logo": "https://public-ds.static.dobbersports.com/team-logo/dark/14.png",
+      "goalies": [
+        {"name": "Andrei Vasilevskiy", "number": 88, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8475692.png"}
+      ]
+    },
+    {
+      "name": "Toronto Maple Leafs",
+      "abbrev": "TOR",
+      "logo": "https://public-ds.static.dobbersports.com/team-logo/dark/10.png",
+      "goalies": [
+        {"name": "Joseph Woll", "number": 60, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8479398.png"},
+        {"name": "Anthony Stolarz", "number": 41, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8480382.png"}
+      ]
+    },
+    {
+      "name": "Florida Panthers",
+      "abbrev": "FLA",
+      "logo": "https://public-ds.static.dobbersports.com/team-logo/dark/13.png",
+      "goalies": [
+        {"name": "Sergei Bobrovsky", "number": 72, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8476346.png"}
+      ]
+    },
+    {
+      "name": "New York Rangers",
+      "abbrev": "NYR",
+      "logo": "https://public-ds.static.dobbersports.com/team-logo/dark/3.png",
+      "goalies": [
+        {"name": "Igor Shesterkin", "number": 31, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8475831.png"}
+      ]
+    },
+    {
+      "name": "Edmonton Oilers",
+      "abbrev": "EDM",
+      "logo": "https://public-ds.static.dobbersports.com/team-logo/dark/22.png",
+      "goalies": [
+        {"name": "Stuart Skinner", "number": 74, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8477476.png"}
+      ]
+    },
+    {
+      "name": "Vegas Golden Knights",
+      "abbrev": "VGK",
+      "logo": "https://public-ds.static.dobbersports.com/team-logo/dark/54.png",
+      "goalies": [
+        {"name": "Adin Hill", "number": 33, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8478492.png"}
+      ]
+    },
+    {
+      "name": "Colorado Avalanche",
+      "abbrev": "COL",
+      "logo": "https://public-ds.static.dobbersports.com/team-logo/dark/21.png",
+      "goalies": [
+        {"name": "Alexandar Georgiev", "number": 40, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8478492.png"}
+      ]
+    },
+    {
+      "name": "Dallas Stars",
+      "abbrev": "DAL",
+      "logo": "https://public-ds.static.dobbersports.com/team-logo/dark/25.png",
+      "goalies": [
+        {"name": "Jake Oettinger", "number": 29, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8479398.png"}
+      ]
+    }
+  ]
+}
