@@ -7,185 +7,109 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Fira Code', monospace;
-            background: #000;
-            color: #00ff41;
-            padding: 20px;
-        }
-        h1 { text-align: center; margin-bottom: 30px; }
-        .form { max-width: 800px; margin: 0 auto; background: #0a0a0a; padding: 30px; border: 2px solid #00ff41; border-radius: 8px; }
-        label { display: block; margin: 15px 0 5px; }
-        input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            background: #000;
-            border: 1px solid #00ff41;
-            color: #00ff41;
-            font-family: 'Fira Code', monospace;
-            border-radius: 4px;
-        }
-        textarea { min-height: 80px; }
+        body { font-family: 'Fira Code', monospace; background: #000; color: #00ff41; padding: 20px; }
+        h1 { text-align: center; margin-bottom: 30px; text-shadow: 0 0 20px #00ff41; }
+        .form { max-width: 900px; margin: 0 auto; background: #0a0a0a; padding: 30px; border: 2px solid #00ff41; border-radius: 8px; }
+        h3 { margin: 25px 0 15px; color: #00ff41; border-bottom: 1px solid #00ff41; padding-bottom: 5px; }
+        label { display: block; margin: 15px 0 5px; font-size: 0.9em; }
+        input, select, textarea { width: 100%; padding: 10px; background: #000; border: 1px solid #00ff41; color: #00ff41; font-family: 'Fira Code', monospace; border-radius: 4px; font-size: 0.95em; }
+        textarea { min-height: 80px; resize: vertical; }
         .row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        button {
-            width: 100%;
-            padding: 15px;
-            margin-top: 20px;
-            background: #00ff41;
-            color: #000;
-            border: none;
-            font-family: 'Fira Code', monospace;
-            font-weight: bold;
-            font-size: 1.1em;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        button:hover { background: #00cc33; }
-        .games-list { max-width: 800px; margin: 30px auto; }
-        .game-item {
-            background: #0a0a0a;
-            border: 1px solid #00ff41;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-        }
-        .delete-btn {
-            background: #ff4136;
-            color: #fff;
-            padding: 5px 15px;
-            margin-top: 10px;
-        }
+        .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
+        button { width: 100%; padding: 15px; margin-top: 20px; background: #00ff41; color: #000; border: none; font-family: 'Fira Code', monospace; font-weight: bold; font-size: 1.1em; cursor: pointer; border-radius: 4px; transition: all 0.3s; }
+        button:hover { background: #00cc33; transform: translateY(-2px); }
+        .status-btns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 10px 0; }
+        .status-btns button { padding: 10px; margin: 0; background: #000; border: 1px solid #00ff41; color: #00ff41; font-size: 0.9em; }
+        .status-btns button.active { background: #00ff41; color: #000; }
+        .games-list { max-width: 900px; margin: 30px auto; }
+        .game-item { background: #0a0a0a; border: 1px solid #00ff41; padding: 15px; margin-bottom: 10px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
+        .delete-btn { background: #ff4136; color: #fff; padding: 8px 20px; margin: 0; width: auto; }
+        .preview { margin-top: 15px; padding: 10px; background: #000; border: 1px solid #00ff41; border-radius: 4px; display: none; }
+        .preview img { max-width: 60px; border-radius: 50%; border: 2px solid #00ff41; }
+        .helper { font-size: 0.8em; opacity: 0.6; margin-top: 5px; }
     </style>
 </head>
 <body>
     <h1>🏒 ADMIN PANEL</h1>
-
     <div class="form">
         <h2>Add Game</h2>
-        
         <label>Game Date</label>
         <input type="date" id="gameDate">
-        
-        <label>Game Time</label>
+        <label>Game Time (ET)</label>
         <input type="time" id="gameTime">
-        
         <label>Venue</label>
         <input type="text" id="venue" placeholder="TD Garden">
         
-        <h3 style="margin-top: 20px;">Away Team</h3>
-        <label>Team Name</label>
-        <input type="text" id="awayTeam" placeholder="Carolina Hurricanes">
-        
-        <label>Team Abbrev</label>
-        <input type="text" id="awayAbbrev" placeholder="CAR">
-        
-        <label>Team Logo URL</label>
-        <input type="text" id="awayLogo" placeholder="https://...">
-        
-        <label>Goalie Name</label>
-        <input type="text" id="awayGoalieName" placeholder="Frederik Andersen">
-        
-        <div class="row">
-            <div>
-                <label>Number</label>
-                <input type="number" id="awayGoalieNum" placeholder="31">
-            </div>
-            <div>
-                <label>Headshot URL</label>
-                <input type="text" id="awayGoalieImg" placeholder="https://...">
-            </div>
+        <h3>🚀 Away Team</h3>
+        <label>Select Team</label>
+        <select id="awayTeamSelect" onchange="loadAwayTeam()"><option value="">-- Select Team --</option></select>
+        <div id="awayTeamPreview" class="preview"></div>
+        <label>Select Goalie</label>
+        <select id="awayGoalieSelect" onchange="loadAwayGoalie()"><option value="">-- Select Goalie --</option></select>
+        <div id="awayGoaliePreview" class="preview"></div>
+        <label>Status</label>
+        <div class="status-btns">
+            <button type="button" class="status-btn away-status active" data-status="CONFIRMED">CONFIRMED</button>
+            <button type="button" class="status-btn away-status" data-status="PROBABLE">PROBABLE</button>
+            <button type="button" class="status-btn away-status" data-status="LIKELY">LIKELY</button>
         </div>
-        
-        <label>Record (W-L-OTL)</label>
-        <input type="text" id="awayRecord" placeholder="4-2-0">
-        
-        <div class="row">
-            <div>
-                <label>GAA</label>
-                <input type="number" step="0.01" id="awayGAA" placeholder="3.11">
-            </div>
-            <div>
-                <label>SV%</label>
-                <input type="number" step="0.001" id="awaySV" placeholder="0.892">
-            </div>
+        <div class="row3">
+            <div><label>Wins</label><input type="number" id="awayWins" value="0" min="0"></div>
+            <div><label>Losses</label><input type="number" id="awayLosses" value="0" min="0"></div>
+            <div><label>OTL</label><input type="number" id="awayOTL" value="0" min="0"></div>
         </div>
-        
-        <label>Shutouts</label>
-        <input type="number" id="awaySO" placeholder="0">
-        
-        <h3 style="margin-top: 20px;">Home Team</h3>
-        <label>Team Name</label>
-        <input type="text" id="homeTeam" placeholder="Boston Bruins">
-        
-        <label>Team Abbrev</label>
-        <input type="text" id="homeAbbrev" placeholder="BOS">
-        
-        <label>Team Logo URL</label>
-        <input type="text" id="homeLogo" placeholder="https://...">
-        
-        <label>Goalie Name</label>
-        <input type="text" id="homeGoalieName" placeholder="Jeremy Swayman">
-        
         <div class="row">
-            <div>
-                <label>Number</label>
-                <input type="number" id="homeGoalieNum" placeholder="1">
-            </div>
-            <div>
-                <label>Headshot URL</label>
-                <input type="text" id="homeGoalieImg" placeholder="https://...">
-            </div>
+            <div><label>GAA</label><input type="number" step="0.01" id="awayGAA" value="2.50"></div>
+            <div><label>SV%</label><input type="number" step="0.001" id="awaySV" value="0.915"></div>
         </div>
+        <label>Shutouts</label><input type="number" id="awaySO" value="0" min="0">
+        <label>Win Probability (%)</label><input type="number" id="awayWinProb" value="50" min="0" max="100">
+        <label>Projected Saves</label><input type="number" id="awayProjSaves" value="25">
+        <label>Confirmation Tweet URL (optional)</label><input type="url" id="awayTweetURL" placeholder="https://twitter.com/...">
+        <label>Confirmation Text (optional)</label><textarea id="awayConfirmText" placeholder="Confirmed by coach..."></textarea>
         
-        <label>Record (W-L-OTL)</label>
-        <input type="text" id="homeRecord" placeholder="3-3-1">
-        
+        <h3>🏠 Home Team</h3>
+        <label>Select Team</label>
+        <select id="homeTeamSelect" onchange="loadHomeTeam()"><option value="">-- Select Team --</option></select>
+        <div id="homeTeamPreview" class="preview"></div>
+        <label>Select Goalie</label>
+        <select id="homeGoalieSelect" onchange="loadHomeGoalie()"><option value="">-- Select Goalie --</option></select>
+        <div id="homeGoaliePreview" class="preview"></div>
+        <label>Status</label>
+        <div class="status-btns">
+            <button type="button" class="status-btn home-status active" data-status="CONFIRMED">CONFIRMED</button>
+            <button type="button" class="status-btn home-status" data-status="PROBABLE">PROBABLE</button>
+            <button type="button" class="status-btn home-status" data-status="LIKELY">LIKELY</button>
+        </div>
+        <div class="row3">
+            <div><label>Wins</label><input type="number" id="homeWins" value="0" min="0"></div>
+            <div><label>Losses</label><input type="number" id="homeLosses" value="0" min="0"></div>
+            <div><label>OTL</label><input type="number" id="homeOTL" value="0" min="0"></div>
+        </div>
         <div class="row">
-            <div>
-                <label>GAA</label>
-                <input type="number" step="0.01" id="homeGAA" placeholder="3.47">
-            </div>
-            <div>
-                <label>SV%</label>
-                <input type="number" step="0.001" id="homeSV" placeholder="0.884">
-            </div>
+            <div><label>GAA</label><input type="number" step="0.01" id="homeGAA" value="2.50"></div>
+            <div><label>SV%</label><input type="number" step="0.001" id="homeSV" value="0.915"></div>
         </div>
+        <label>Shutouts</label><input type="number" id="homeSO" value="0" min="0">
+        <label>Win Probability (%)</label><input type="number" id="homeWinProb" value="50" min="0" max="100">
+        <label>Projected Saves</label><input type="number" id="homeProjSaves" value="25">
+        <label>Confirmation Tweet URL (optional)</label><input type="url" id="homeTweetURL" placeholder="https://twitter.com/...">
+        <label>Confirmation Text (optional)</label><textarea id="homeConfirmText" placeholder="Confirmed by coach..."></textarea>
         
-        <label>Shutouts</label>
-        <input type="number" id="homeSO" placeholder="0">
-        
-        <h3 style="margin-top: 20px;">Polymarket</h3>
-        <label>Link</label>
-        <input type="text" id="polyLink" placeholder="https://polymarket.com/...">
-        
-        <div class="row">
-            <div>
-                <label>Away Win Odds (%)</label>
-                <input type="number" id="awayOdds" placeholder="45">
-            </div>
-            <div>
-                <label>Home Win Odds (%)</label>
-                <input type="number" id="homeOdds" placeholder="55">
-            </div>
-        </div>
-        
-        <label>Analysis</label>
-        <textarea id="analysis" placeholder="Your betting analysis..."></textarea>
-        
-        <label>Recommendation</label>
-        <input type="text" id="recommendation" placeholder="UNDERVALUED - Bet Away ML">
-        
+        <h3>💰 Polymarket</h3>
+        <label>Polymarket Market ID</label><input type="text" id="polyMarketId" placeholder="nhl-chi-edm-2025-11-01">
+        <div class="helper">Get this from the Polymarket URL after /market/</div>
+        <label>Away Team Win Odds (%)</label><input type="number" id="awayOdds" value="50" min="0" max="100" oninput="autoCalcOdds('away')">
+        <label>Home Team Win Odds (%)</label><input type="number" id="homeOdds" value="50" min="0" max="100" oninput="autoCalcOdds('home')">
+        <label>Analysis</label><textarea id="analysis" placeholder="Your betting analysis..."></textarea>
+        <label>Recommendation</label><input type="text" id="recommendation" placeholder="UNDERVALUED - Bet Away ML">
         <button onclick="addGame()">ADD GAME</button>
     </div>
-
-    <div class="games-list">
-        <h2>Current Games</h2>
-        <div id="gamesList"></div>
-    </div>
+    <div class="games-list"><h2>Current Games</h2><div id="gamesList"></div></div>
 
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getDatabase, ref, set, onValue, remove } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
+        import { getDatabase, ref, set, onValue } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
 
         const firebaseConfig = {
             apiKey: "AIzaSyCWia-DYC6KmVE4Uq2c-BlLsRPcTHZejco",
@@ -199,93 +123,126 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
-        let currentGames = [];
+        let teams = {}, currentGames = [], awayStatus = 'CONFIRMED', homeStatus = 'CONFIRMED';
 
-        onValue(ref(db, 'games'), (snapshot) => {
-            const data = snapshot.val() || {};
-            currentGames = data.games || [];
-            renderGamesList();
+        fetch('nhl-teams.json').then(r => r.json()).then(data => {
+            teams = data.teams;
+            Object.keys(teams).sort().forEach(abbrev => {
+                document.getElementById('awayTeamSelect').innerHTML += `<option value="${abbrev}">${teams[abbrev].name}</option>`;
+                document.getElementById('homeTeamSelect').innerHTML += `<option value="${abbrev}">${teams[abbrev].name}</option>`;
+            });
         });
 
-        function renderGamesList() {
-            const list = document.getElementById('gamesList');
-            if (currentGames.length === 0) {
-                list.innerHTML = '<p>No games added yet</p>';
-                return;
-            }
-            list.innerHTML = currentGames.map((game, idx) => `
-                <div class="game-item">
-                    <strong>${game.away.teamAbbrev} @ ${game.home.teamAbbrev}</strong>
-                    <div>${game.gameDate} ${game.gameTime}</div>
-                    <button class="delete-btn" onclick="deleteGame(${idx})">DELETE</button>
-                </div>
-            `).join('');
-        }
+        window.loadAwayTeam = () => {
+            const abbrev = document.getElementById('awayTeamSelect').value;
+            if (!abbrev) return;
+            const team = teams[abbrev];
+            document.getElementById('awayTeamPreview').style.display = 'block';
+            document.getElementById('awayTeamPreview').innerHTML = `<img src="${team.logo}"> ${team.name}`;
+            document.getElementById('awayGoalieSelect').innerHTML = '<option value="">-- Select Goalie --</option>';
+            team.goalies.forEach((g, i) => document.getElementById('awayGoalieSelect').innerHTML += `<option value="${i}">${g.name} #${g.number}</option>`);
+        };
 
-        window.addGame = async function() {
+        window.loadHomeTeam = () => {
+            const abbrev = document.getElementById('homeTeamSelect').value;
+            if (!abbrev) return;
+            const team = teams[abbrev];
+            document.getElementById('homeTeamPreview').style.display = 'block';
+            document.getElementById('homeTeamPreview').innerHTML = `<img src="${team.logo}"> ${team.name}`;
+            document.getElementById('homeGoalieSelect').innerHTML = '<option value="">-- Select Goalie --</option>';
+            team.goalies.forEach((g, i) => document.getElementById('homeGoalieSelect').innerHTML += `<option value="${i}">${g.name} #${g.number}</option>`);
+        };
+
+        window.loadAwayGoalie = () => {
+            const abbrev = document.getElementById('awayTeamSelect').value, idx = document.getElementById('awayGoalieSelect').value;
+            if (!abbrev || idx === '') return;
+            const g = teams[abbrev].goalies[idx];
+            document.getElementById('awayGoaliePreview').style.display = 'block';
+            document.getElementById('awayGoaliePreview').innerHTML = `<img src="${g.img}"> ${g.name} #${g.number}`;
+        };
+
+        window.loadHomeGoalie = () => {
+            const abbrev = document.getElementById('homeTeamSelect').value, idx = document.getElementById('homeGoalieSelect').value;
+            if (!abbrev || idx === '') return;
+            const g = teams[abbrev].goalies[idx];
+            document.getElementById('homeGoaliePreview').style.display = 'block';
+            document.getElementById('homeGoaliePreview').innerHTML = `<img src="${g.img}"> ${g.name} #${g.number}`;
+        };
+
+        document.querySelectorAll('.status-btn').forEach(btn => btn.onclick = function() {
+            const group = this.classList.contains('away-status') ? '.away-status' : '.home-status';
+            document.querySelectorAll(group).forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            if (this.classList.contains('away-status')) awayStatus = this.dataset.status;
+            else homeStatus = this.dataset.status;
+        });
+
+        window.autoCalcOdds = (changed) => {
+            const away = parseInt(document.getElementById('awayOdds').value) || 0;
+            if (changed === 'away') document.getElementById('homeOdds').value = 100 - away;
+            else document.getElementById('awayOdds').value = 100 - (parseInt(document.getElementById('homeOdds').value) || 0);
+        };
+
+        window.addGame = async () => {
+            const awayAbbrev = document.getElementById('awayTeamSelect').value, homeAbbrev = document.getElementById('homeTeamSelect').value;
+            const awayIdx = document.getElementById('awayGoalieSelect').value, homeIdx = document.getElementById('homeGoalieSelect').value;
+            if (!awayAbbrev || !homeAbbrev || awayIdx === '' || homeIdx === '') return alert('Select teams and goalies');
+            
             const game = {
-                gameId: `manual-${Date.now()}`,
+                gameId: `m-${Date.now()}`,
                 gameDate: document.getElementById('gameDate').value,
                 gameTime: document.getElementById('gameTime').value,
                 venue: document.getElementById('venue').value,
                 away: {
-                    team: document.getElementById('awayTeam').value,
-                    teamAbbrev: document.getElementById('awayAbbrev').value,
-                    teamLogo: document.getElementById('awayLogo').value,
+                    team: teams[awayAbbrev].name, teamAbbrev: awayAbbrev, teamLogo: teams[awayAbbrev].logo,
                     goalie: {
-                        name: document.getElementById('awayGoalieName').value,
-                        number: document.getElementById('awayGoalieNum').value,
-                        confirmed: true,
-                        headshot: document.getElementById('awayGoalieImg').value,
+                        name: teams[awayAbbrev].goalies[awayIdx].name, number: teams[awayAbbrev].goalies[awayIdx].number,
+                        status: awayStatus, headshot: teams[awayAbbrev].goalies[awayIdx].img,
                         stats: {
-                            record: document.getElementById('awayRecord').value,
-                            gaa: parseFloat(document.getElementById('awayGAA').value),
-                            savePct: parseFloat(document.getElementById('awaySV').value),
-                            shutouts: parseInt(document.getElementById('awaySO').value)
-                        }
+                            record: `${document.getElementById('awayWins').value}-${document.getElementById('awayLosses').value}-${document.getElementById('awayOTL').value}`,
+                            gaa: parseFloat(document.getElementById('awayGAA').value), savePct: parseFloat(document.getElementById('awaySV').value),
+                            shutouts: parseInt(document.getElementById('awaySO').value), winProb: parseInt(document.getElementById('awayWinProb').value),
+                            projSaves: parseInt(document.getElementById('awayProjSaves').value)
+                        },
+                        confirmationTweet: document.getElementById('awayTweetURL').value, confirmationText: document.getElementById('awayConfirmText').value
                     }
                 },
                 home: {
-                    team: document.getElementById('homeTeam').value,
-                    teamAbbrev: document.getElementById('homeAbbrev').value,
-                    teamLogo: document.getElementById('homeLogo').value,
+                    team: teams[homeAbbrev].name, teamAbbrev: homeAbbrev, teamLogo: teams[homeAbbrev].logo,
                     goalie: {
-                        name: document.getElementById('homeGoalieName').value,
-                        number: document.getElementById('homeGoalieNum').value,
-                        confirmed: true,
-                        headshot: document.getElementById('homeGoalieImg').value,
+                        name: teams[homeAbbrev].goalies[homeIdx].name, number: teams[homeAbbrev].goalies[homeIdx].number,
+                        status: homeStatus, headshot: teams[homeAbbrev].goalies[homeIdx].img,
                         stats: {
-                            record: document.getElementById('homeRecord').value,
-                            gaa: parseFloat(document.getElementById('homeGAA').value),
-                            savePct: parseFloat(document.getElementById('homeSV').value),
-                            shutouts: parseInt(document.getElementById('homeSO').value)
-                        }
+                            record: `${document.getElementById('homeWins').value}-${document.getElementById('homeLosses').value}-${document.getElementById('homeOTL').value}`,
+                            gaa: parseFloat(document.getElementById('homeGAA').value), savePct: parseFloat(document.getElementById('homeSV').value),
+                            shutouts: parseInt(document.getElementById('homeSO').value), winProb: parseInt(document.getElementById('homeWinProb').value),
+                            projSaves: parseInt(document.getElementById('homeProjSaves').value)
+                        },
+                        confirmationTweet: document.getElementById('homeTweetURL').value, confirmationText: document.getElementById('homeConfirmText').value
                     }
                 },
                 polymarket: {
-                    link: document.getElementById('polyLink').value,
-                    awayWinOdds: parseInt(document.getElementById('awayOdds').value),
-                    homeWinOdds: parseInt(document.getElementById('homeOdds').value),
-                    analysis: document.getElementById('analysis').value,
+                    marketId: document.getElementById('polyMarketId').value, awayWinOdds: parseInt(document.getElementById('awayOdds').value),
+                    homeWinOdds: parseInt(document.getElementById('homeOdds').value), analysis: document.getElementById('analysis').value,
                     recommendation: document.getElementById('recommendation').value
                 }
             };
-
             currentGames.push(game);
-            await set(ref(db, 'games'), {
-                timestamp: new Date().toISOString(),
-                games: currentGames
-            });
+            await set(ref(db, 'games'), { timestamp: new Date().toISOString(), games: currentGames });
             alert('Game added! ✅');
         };
 
-        window.deleteGame = async function(idx) {
-            if (confirm('Delete this game?')) {
-                currentGames.splice(idx, 1);
-                await set(ref(db, 'games'), {
-                    timestamp: new Date().toISOString(),
-                    games: currentGames
-                });
+        onValue(ref(db, 'games'), snap => {
+            const data = snap.val() || {};
+            currentGames = data.games || [];
+            document.getElementById('gamesList').innerHTML = currentGames.length === 0 ? '<p style="text-align:center;opacity:0.5;">No games yet</p>' :
+                currentGames.map((g, i) => `<div class="game-item"><div><strong>${g.away.teamAbbrev} @ ${g.home.teamAbbrev}</strong><div style="font-size:0.9em;opacity:0.8;">${g.gameDate} ${g.gameTime}</div></div><button class="delete-btn" onclick="deleteGame(${i})">DELETE</button></div>`).join('');
+        });
+
+        window.deleteGame = async (i) => {
+            if (confirm('Delete?')) {
+                currentGames.splice(i, 1);
+                await set(ref(db, 'games'), { timestamp: new Date().toISOString(), games: currentGames });
             }
         };
 
