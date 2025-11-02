@@ -1,87 +1,260 @@
 {
-  "teams": [
-    {
+  "teams": {
+    "BOS": {
       "name": "Boston Bruins",
-      "abbrev": "BOS",
-      "logo": "https://public-ds.static.dobbersports.com/team-logo/dark/6.png",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/bos.png",
       "goalies": [
-        {"name": "Jeremy Swayman", "number": 1, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8476945.png"},
-        {"name": "Joonas Korpisalo", "number": 70, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8476883.png"}
+        {"name": "Jeremy Swayman", "number": "1", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8476945.jpg"},
+        {"name": "Joonas Korpisalo", "number": "70", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8476914.jpg"}
       ]
     },
-    {
+    "CAR": {
       "name": "Carolina Hurricanes",
-      "abbrev": "CAR",
-      "logo": "https://public-ds.static.dobbersports.com/team-logo/dark/12.png",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/car.png",
       "goalies": [
-        {"name": "Frederik Andersen", "number": 31, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8475883.png"},
-        {"name": "Pyotr Kochetkov", "number": 52, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8478492.png"}
+        {"name": "Frederik Andersen", "number": "31", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8475883.jpg"},
+        {"name": "Pyotr Kochetkov", "number": "52", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8481611.jpg"}
       ]
     },
-    {
+    "TBL": {
       "name": "Tampa Bay Lightning",
-      "abbrev": "TBL",
-      "logo": "https://public-ds.static.dobbersports.com/team-logo/dark/14.png",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/tb.png",
       "goalies": [
-        {"name": "Andrei Vasilevskiy", "number": 88, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8475692.png"}
+        {"name": "Andrei Vasilevskiy", "number": "88", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8476883.jpg"},
+        {"name": "Jonas Johansson", "number": "39", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8477992.jpg"}
       ]
     },
-    {
+    "TOR": {
       "name": "Toronto Maple Leafs",
-      "abbrev": "TOR",
-      "logo": "https://public-ds.static.dobbersports.com/team-logo/dark/10.png",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/tor.png",
       "goalies": [
-        {"name": "Joseph Woll", "number": 60, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8479398.png"},
-        {"name": "Anthony Stolarz", "number": 41, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8480382.png"}
+        {"name": "Joseph Woll", "number": "60", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8479361.jpg"},
+        {"name": "Anthony Stolarz", "number": "41", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8476369.jpg"}
       ]
     },
-    {
+    "FLA": {
       "name": "Florida Panthers",
-      "abbrev": "FLA",
-      "logo": "https://public-ds.static.dobbersports.com/team-logo/dark/13.png",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/fla.png",
       "goalies": [
-        {"name": "Sergei Bobrovsky", "number": 72, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8476346.png"}
+        {"name": "Sergei Bobrovsky", "number": "72", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8475683.jpg"},
+        {"name": "Spencer Knight", "number": "30", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8480458.jpg"}
       ]
     },
-    {
+    "NYR": {
       "name": "New York Rangers",
-      "abbrev": "NYR",
-      "logo": "https://public-ds.static.dobbersports.com/team-logo/dark/3.png",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/nyr.png",
       "goalies": [
-        {"name": "Igor Shesterkin", "number": 31, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8475831.png"}
+        {"name": "Igor Shesterkin", "number": "31", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8478048.jpg"},
+        {"name": "Jonathan Quick", "number": "32", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8471734.jpg"}
       ]
     },
-    {
+    "NYI": {
+      "name": "New York Islanders",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/nyi.png",
+      "goalies": [
+        {"name": "Ilya Sorokin", "number": "30", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8478009.jpg"},
+        {"name": "Semyon Varlamov", "number": "40", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8473575.jpg"}
+      ]
+    },
+    "EDM": {
       "name": "Edmonton Oilers",
-      "abbrev": "EDM",
-      "logo": "https://public-ds.static.dobbersports.com/team-logo/dark/22.png",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/edm.png",
       "goalies": [
-        {"name": "Stuart Skinner", "number": 74, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8477476.png"}
+        {"name": "Stuart Skinner", "number": "74", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8479973.jpg"},
+        {"name": "Calvin Pickard", "number": "30", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8475179.jpg"}
       ]
     },
-    {
+    "VGK": {
       "name": "Vegas Golden Knights",
-      "abbrev": "VGK",
-      "logo": "https://public-ds.static.dobbersports.com/team-logo/dark/54.png",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/vgk.png",
       "goalies": [
-        {"name": "Adin Hill", "number": 33, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8478492.png"}
+        {"name": "Adin Hill", "number": "33", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8477960.jpg"},
+        {"name": "Ilya Samsonov", "number": "35", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8478492.jpg"}
       ]
     },
-    {
+    "COL": {
       "name": "Colorado Avalanche",
-      "abbrev": "COL",
-      "logo": "https://public-ds.static.dobbersports.com/team-logo/dark/21.png",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/col.png",
       "goalies": [
-        {"name": "Alexandar Georgiev", "number": 40, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8478492.png"}
+        {"name": "Alexandar Georgiev", "number": "40", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8478010.jpg"},
+        {"name": "Justus Annunen", "number": "60", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8480057.jpg"}
       ]
     },
-    {
+    "DAL": {
       "name": "Dallas Stars",
-      "abbrev": "DAL",
-      "logo": "https://public-ds.static.dobbersports.com/team-logo/dark/25.png",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/dal.png",
       "goalies": [
-        {"name": "Jake Oettinger", "number": 29, "headshot": "https://public-ds.static.dobbersports.com/player-headshots/8479398.png"}
+        {"name": "Jake Oettinger", "number": "29", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8479979.jpg"},
+        {"name": "Casey DeSmith", "number": "1", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8476980.jpg"}
+      ]
+    },
+    "WPG": {
+      "name": "Winnipeg Jets",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/wpg.png",
+      "goalies": [
+        {"name": "Connor Hellebuyck", "number": "37", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8476945.jpg"},
+        {"name": "Eric Comrie", "number": "31", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8476404.jpg"}
+      ]
+    },
+    "CHI": {
+      "name": "Chicago Blackhawks",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/chi.png",
+      "goalies": [
+        {"name": "Petr Mrazek", "number": "34", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8475678.jpg"},
+        {"name": "Arvid Soderblom", "number": "40", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8480216.jpg"}
+      ]
+    },
+    "DET": {
+      "name": "Detroit Red Wings",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/det.png",
+      "goalies": [
+        {"name": "Cam Talbot", "number": "39", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8475660.jpg"},
+        {"name": "Ville Husso", "number": "35", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8477911.jpg"}
+      ]
+    },
+    "ANA": {
+      "name": "Anaheim Ducks",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/ana.png",
+      "goalies": [
+        {"name": "John Gibson", "number": "36", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8476434.jpg"},
+        {"name": "Lukas Dostal", "number": "1", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8480830.jpg"}
+      ]
+    },
+    "SJS": {
+      "name": "San Jose Sharks",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/sj.png",
+      "goalies": [
+        {"name": "Mackenzie Blackwood", "number": "29", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8478406.jpg"},
+        {"name": "Vitek Vanecek", "number": "41", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8477970.jpg"}
+      ]
+    },
+    "CGY": {
+      "name": "Calgary Flames",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/cgy.png",
+      "goalies": [
+        {"name": "Dustin Wolf", "number": "31", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8480830.jpg"},
+        {"name": "Dan Vladar", "number": "80", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8478435.jpg"}
+      ]
+    },
+    "PHI": {
+      "name": "Philadelphia Flyers",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/phi.png",
+      "goalies": [
+        {"name": "Samuel Ersson", "number": "33", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8480846.jpg"},
+        {"name": "Ivan Fedotov", "number": "82", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8478024.jpg"}
+      ]
+    },
+    "NJD": {
+      "name": "New Jersey Devils",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/njd.png",
+      "goalies": [
+        {"name": "Jacob Markstrom", "number": "25", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8475172.jpg"},
+        {"name": "Jake Allen", "number": "34", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8474596.jpg"}
+      ]
+    },
+    "CBJ": {
+      "name": "Columbus Blue Jackets",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/cbj.png",
+      "goalies": [
+        {"name": "Elvis Merzlikins", "number": "90", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8478007.jpg"},
+        {"name": "Daniil Tarasov", "number": "40", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8480104.jpg"}
+      ]
+    },
+    "PIT": {
+      "name": "Pittsburgh Penguins",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/pit.png",
+      "goalies": [
+        {"name": "Tristan Jarry", "number": "35", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8477465.jpg"},
+        {"name": "Alex Nedeljkovic", "number": "39", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8477361.jpg"}
+      ]
+    },
+    "WSH": {
+      "name": "Washington Capitals",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/wsh.png",
+      "goalies": [
+        {"name": "Logan Thompson", "number": "48", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8479385.jpg"},
+        {"name": "Charlie Lindgren", "number": "79", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8476389.jpg"}
+      ]
+    },
+    "NSH": {
+      "name": "Nashville Predators",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/nsh.png",
+      "goalies": [
+        {"name": "Juuse Saros", "number": "74", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8477424.jpg"},
+        {"name": "Scott Wedgewood", "number": "41", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8476906.jpg"}
+      ]
+    },
+    "STL": {
+      "name": "St. Louis Blues",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/stl.png",
+      "goalies": [
+        {"name": "Jordan Binnington", "number": "50", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8477598.jpg"},
+        {"name": "Joel Hofer", "number": "30", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8480014.jpg"}
+      ]
+    },
+    "MIN": {
+      "name": "Minnesota Wild",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/min.png",
+      "goalies": [
+        {"name": "Filip Gustavsson", "number": "32", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8479406.jpg"},
+        {"name": "Marc-Andre Fleury", "number": "29", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8470594.jpg"}
+      ]
+    },
+    "VAN": {
+      "name": "Vancouver Canucks",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/van.png",
+      "goalies": [
+        {"name": "Kevin Lankinen", "number": "32", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8478046.jpg"},
+        {"name": "Arturs Silovs", "number": "31", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8480027.jpg"}
+      ]
+    },
+    "LAK": {
+      "name": "Los Angeles Kings",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/la.png",
+      "goalies": [
+        {"name": "Darcy Kuemper", "number": "35", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8475311.jpg"},
+        {"name": "David Rittich", "number": "33", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8476316.jpg"}
+      ]
+    },
+    "SEA": {
+      "name": "Seattle Kraken",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/sea.png",
+      "goalies": [
+        {"name": "Joey Daccord", "number": "35", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8478466.jpg"},
+        {"name": "Philipp Grubauer", "number": "31", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8475831.jpg"}
+      ]
+    },
+    "UTA": {
+      "name": "Utah Hockey Club",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/utah.png",
+      "goalies": [
+        {"name": "Karel Vejmelka", "number": "70", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8478489.jpg"},
+        {"name": "Connor Ingram", "number": "39", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8478049.jpg"}
+      ]
+    },
+    "MTL": {
+      "name": "Montreal Canadiens",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/mtl.png",
+      "goalies": [
+        {"name": "Sam Montembeault", "number": "35", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8478031.jpg"},
+        {"name": "Cayden Primeau", "number": "30", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8479361.jpg"}
+      ]
+    },
+    "OTT": {
+      "name": "Ottawa Senators",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/ott.png",
+      "goalies": [
+        {"name": "Linus Ullmark", "number": "35", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8476999.jpg"},
+        {"name": "Anton Forsberg", "number": "31", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8476341.jpg"}
+      ]
+    },
+    "BUF": {
+      "name": "Buffalo Sabres",
+      "logo": "https://a.espncdn.com/i/teamlogos/nhl/500/buf.png",
+      "goalies": [
+        {"name": "Ukko-Pekka Luukkonen", "number": "1", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8479974.jpg"},
+        {"name": "Devon Levi", "number": "27", "img": "https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8481617.jpg"}
       ]
     }
-  ]
+  }
 }
