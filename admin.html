@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Puck Prophet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Fira Code', monospace;
+            background: #000;
+            color: #00ff41;
+            padding: 20px;
+        }
+        h1 { text-align: center; margin-bottom: 30px; }
+        .form { max-width: 800px; margin: 0 auto; background: #0a0a0a; padding: 30px; border: 2px solid #00ff41; border-radius: 8px; }
+        label { display: block; margin: 15px 0 5px; }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            background: #000;
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            font-family: 'Fira Code', monospace;
+            border-radius: 4px;
+        }
+        textarea { min-height: 80px; }
+        .row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            background: #00ff41;
+            color: #000;
+            border: none;
+            font-family: 'Fira Code', monospace;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover { background: #00cc33; }
+        .games-list { max-width: 800px; margin: 30px auto; }
+        .game-item {
+            background: #0a0a0a;
+            border: 1px solid #00ff41;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        .delete-btn {
+            background: #ff4136;
+            color: #fff;
+            padding: 5px 15px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🏒 ADMIN PANEL</h1>
+
+    <div class="form">
+        <h2>Add Game</h2>
+        
+        <label>Game Date</label>
+        <input type="date" id="gameDate">
+        
+        <label>Game Time</label>
+        <input type="time" id="gameTime">
+        
+        <label>Venue</label>
+        <input type="text" id="venue" placeholder="TD Garden">
+        
+        <h3 style="margin-top: 20px;">Away Team</h3>
+        <label>Team Name</label>
+        <input type="text" id="awayTeam" placeholder="Carolina Hurricanes">
+        
+        <label>Team Abbrev</label>
+        <input type="text" id="awayAbbrev" placeholder="CAR">
+        
+        <label>Team Logo URL</label>
+        <input type="text" id="awayLogo" placeholder="https://...">
+        
+        <label>Goalie Name</label>
+        <input type="text" id="awayGoalieName" placeholder="Frederik Andersen">
+        
+        <div class="row">
+            <div>
+                <label>Number</label>
+                <input type="number" id="awayGoalieNum" placeholder="31">
+            </div>
+            <div>
+                <label>Headshot URL</label>
+                <input type="text" id="awayGoalieImg" placeholder="https://...">
+            </div>
+        </div>
+        
+        <label>Record (W-L-OTL)</label>
+        <input type="text" id="awayRecord" placeholder="4-2-0">
+        
+        <div class="row">
+            <div>
+                <label>GAA</label>
+                <input type="number" step="0.01" id="awayGAA" placeholder="3.11">
+            </div>
+            <div>
+                <label>SV%</label>
+                <input type="number" step="0.001" id="awaySV" placeholder="0.892">
+            </div>
+        </div>
+        
+        <label>Shutouts</label>
+        <input type="number" id="awaySO" placeholder="0">
+        
+        <h3 style="margin-top: 20px;">Home Team</h3>
+        <label>Team Name</label>
+        <input type="text" id="homeTeam" placeholder="Boston Bruins">
+        
+        <label>Team Abbrev</label>
+        <input type="text" id="homeAbbrev" placeholder="BOS">
+        
+        <label>Team Logo URL</label>
+        <input type="text" id="homeLogo" placeholder="https://...">
+        
+        <label>Goalie Name</label>
+        <input type="text" id="homeGoalieName" placeholder="Jeremy Swayman">
+        
+        <div class="row">
+            <div>
+                <label>Number</label>
+                <input type="number" id="homeGoalieNum" placeholder="1">
+            </div>
+            <div>
+                <label>Headshot URL</label>
+                <input type="text" id="homeGoalieImg" placeholder="https://...">
+            </div>
+        </div>
+        
+        <label>Record (W-L-OTL)</label>
+        <input type="text" id="homeRecord" placeholder="3-3-1">
+        
+        <div class="row">
+            <div>
+                <label>GAA</label>
+                <input type="number" step="0.01" id="homeGAA" placeholder="3.47">
+            </div>
+            <div>
+                <label>SV%</label>
+                <input type="number" step="0.001" id="homeSV" placeholder="0.884">
+            </div>
+        </div>
+        
+        <label>Shutouts</label>
+        <input type="number" id="homeSO" placeholder="0">
+        
+        <h3 style="margin-top: 20px;">Polymarket</h3>
+        <label>Link</label>
+        <input type="text" id="polyLink" placeholder="https://polymarket.com/...">
+        
+        <div class="row">
+            <div>
+                <label>Away Win Odds (%)</label>
+                <input type="number" id="awayOdds" placeholder="45">
+            </div>
+            <div>
+                <label>Home Win Odds (%)</label>
+                <input type="number" id="homeOdds" placeholder="55">
+            </div>
+        </div>
+        
+        <label>Analysis</label>
+        <textarea id="analysis" placeholder="Your betting analysis..."></textarea>
+        
+        <label>Recommendation</label>
+        <input type="text" id="recommendation" placeholder="UNDERVALUED - Bet Away ML">
+        
+        <button onclick="addGame()">ADD GAME</button>
+    </div>
+
+    <div class="games-list">
+        <h2>Current Games</h2>
+        <div id="gamesList"></div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getDatabase, ref, set, onValue, remove } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
+
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT.firebaseapp.com",
+            databaseURL: "https://YOUR_PROJECT.firebaseio.com",
+            projectId: "YOUR_PROJECT"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        let currentGames = [];
+
+        onValue(ref(db, 'games'), (snapshot) => {
+            const data = snapshot.val() || {};
+            currentGames = data.games || [];
+            renderGamesList();
+        });
+
+        function renderGamesList() {
+            const list = document.getElementById('gamesList');
+            if (currentGames.length === 0) {
+                list.innerHTML = '<p>No games added yet</p>';
+                return;
+            }
+            list.innerHTML = currentGames.map((game, idx) => `
+                <div class="game-item">
+                    <strong>${game.away.teamAbbrev} @ ${game.home.teamAbbrev}</strong>
+                    <div>${game.gameDate} ${game.gameTime}</div>
+                    <button class="delete-btn" onclick="deleteGame(${idx})">DELETE</button>
+                </div>
+            `).join('');
+        }
+
+        window.addGame = async function() {
+            const game = {
+                gameId: `manual-${Date.now()}`,
+                gameDate: document.getElementById('gameDate').value,
+                gameTime: document.getElementById('gameTime').value,
+                venue: document.getElementById('venue').value,
+                away: {
+                    team: document.getElementById('awayTeam').value,
+                    teamAbbrev: document.getElementById('awayAbbrev').value,
+                    teamLogo: document.getElementById('awayLogo').value,
+                    goalie: {
+                        name: document.getElementById('awayGoalieName').value,
+                        number: document.getElementById('awayGoalieNum').value,
+                        confirmed: true,
+                        headshot: document.getElementById('awayGoalieImg').value,
+                        stats: {
+                            record: document.getElementById('awayRecord').value,
+                            gaa: parseFloat(document.getElementById('awayGAA').value),
+                            savePct: parseFloat(document.getElementById('awaySV').value),
+                            shutouts: parseInt(document.getElementById('awaySO').value)
+                        }
+                    }
+                },
+                home: {
+                    team: document.getElementById('homeTeam').value,
+                    teamAbbrev: document.getElementById('homeAbbrev').value,
+                    teamLogo: document.getElementById('homeLogo').value,
+                    goalie: {
+                        name: document.getElementById('homeGoalieName').value,
+                        number: document.getElementById('homeGoalieNum').value,
+                        confirmed: true,
+                        headshot: document.getElementById('homeGoalieImg').value,
+                        stats: {
+                            record: document.getElementById('homeRecord').value,
+                            gaa: parseFloat(document.getElementById('homeGAA').value),
+                            savePct: parseFloat(document.getElementById('homeSV').value),
+                            shutouts: parseInt(document.getElementById('homeSO').value)
+                        }
+                    }
+                },
+                polymarket: {
+                    link: document.getElementById('polyLink').value,
+                    awayWinOdds: parseInt(document.getElementById('awayOdds').value),
+                    homeWinOdds: parseInt(document.getElementById('homeOdds').value),
+                    analysis: document.getElementById('analysis').value,
+                    recommendation: document.getElementById('recommendation').value
+                }
+            };
+
+            currentGames.push(game);
+            await set(ref(db, 'games'), {
+                timestamp: new Date().toISOString(),
+                games: currentGames
+            });
+            alert('Game added! ✅');
+        };
+
+        window.deleteGame = async function(idx) {
+            if (confirm('Delete this game?')) {
+                currentGames.splice(idx, 1);
+                await set(ref(db, 'games'), {
+                    timestamp: new Date().toISOString(),
+                    games: currentGames
+                });
+            }
+        };
+
+        document.getElementById('gameDate').valueAsDate = new Date();
+    </script>
+</body>
+</html>
