@@ -4,51 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🏒 Puck Prophet</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Fira Code', monospace; background: #000; color: #00ff41; line-height: 1.6; }
-        .header { background: linear-gradient(180deg, #000 0%, #001a00 100%); padding: 30px 20px; text-align: center; border-bottom: 3px solid #00ff41; }
-        h1 { font-size: 3em; text-shadow: 0 0 20px #00ff41; }
-        .container { max-width: 1400px; margin: 0 auto; padding: 30px 20px; }
-        .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(550px, 1fr)); gap: 30px; }
-        .game-card { background: #0a0a0a; border: 2px solid #00ff41; border-radius: 12px; overflow: hidden; transition: all 0.3s; }
-        .game-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 255, 65, 0.3); }
-        .game-header { background: #001a00; padding: 15px; text-align: center; border-bottom: 2px solid #00ff41; }
-        .matchup { display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; padding: 30px; align-items: center; }
+        body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #e5e5e5; }
+        .header { background: linear-gradient(135deg, #1a1a1a 0%, #2d1b1b 100%); padding: 30px 20px; text-align: center; border-bottom: 1px solid #2a2a2a; }
+        h1 { font-size: 2.5em; font-weight: 700; color: #fff; text-shadow: 0 0 30px rgba(231, 76, 60, 0.3); }
+        .subtitle { color: #888; margin-top: 8px; font-size: 1.1em; font-weight: 300; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(600px, 1fr)); gap: 30px; }
+        .game-card { background: linear-gradient(145deg, #1a1a1a 0%, #141414 100%); border: 1px solid #2a2a2a; border-radius: 16px; overflow: hidden; transition: all 0.4s; position: relative; }
+        .game-card:hover { border-color: #e74c3c; transform: translateY(-5px); box-shadow: 0 20px 40px rgba(231, 76, 60, 0.15); }
+        .game-header { background: linear-gradient(135deg, #2d1b1b 0%, #1a1a1a 100%); padding: 15px 20px; text-align: center; border-bottom: 1px solid #2a2a2a; }
+        .game-date { font-size: 0.9em; color: #888; font-weight: 500; }
+        .venue { font-size: 0.85em; color: #666; margin-top: 3px; }
+        .matchup { display: grid; grid-template-columns: 1fr auto 1fr; gap: 25px; padding: 30px; align-items: start; }
         .team { text-align: center; }
-        .team-logo { width: 80px; height: 80px; margin: 0 auto 15px; border-radius: 50%; border: 2px solid #00ff41; overflow: hidden; }
+        .team-logo { width: 70px; height: 70px; margin: 0 auto 12px; border-radius: 50%; overflow: hidden; border: 2px solid #2a2a2a; transition: border-color 0.3s; }
+        .game-card:hover .team-logo { border-color: #e74c3c; }
         .team-logo img { width: 100%; height: 100%; object-fit: contain; }
-        .vs { font-size: 2em; opacity: 0.5; }
-        .goalie-card { background: #000; border: 1px solid #00ff41; border-radius: 8px; padding: 15px; margin-top: 15px; }
-        .goalie-header { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; }
-        .goalie-headshot { width: 60px; height: 60px; border-radius: 50%; border: 2px solid #00ff41; overflow: hidden; }
+        .team-name { font-size: 1.1em; font-weight: 600; color: #fff; margin-bottom: 15px; }
+        .vs { font-size: 1.5em; opacity: 0.3; align-self: center; }
+        .goalie-section { background: #0f0f0f; border: 1px solid #2a2a2a; border-radius: 12px; padding: 18px; margin-top: 12px; }
+        .goalie-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .goalie-headshot { width: 55px; height: 55px; border-radius: 50%; border: 2px solid #e74c3c; overflow: hidden; }
         .goalie-headshot img { width: 100%; height: 100%; object-fit: cover; }
-        .status { padding: 3px 8px; border-radius: 4px; font-size: 0.75em; font-weight: bold; margin-top: 3px; display: inline-block; }
-        .status.CONFIRMED { background: #00ff41; color: #000; }
-        .status.PROBABLE { background: #ffaa00; color: #000; }
-        .status.LIKELY { background: #66ccff; color: #000; }
-        .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; }
-        .stat { background: #0a0a0a; padding: 8px; border-radius: 4px; text-align: center; font-size: 0.9em; }
-        .prob-bars { margin: 15px 0; padding: 15px; background: #000; border: 1px solid #00ff41; border-radius: 8px; }
-        .prob-bar { margin: 10px 0; }
-        .prob-label { font-size: 0.85em; margin-bottom: 5px; display: flex; justify-content: space-between; }
-        .bar { height: 8px; background: #0a0a0a; border-radius: 4px; overflow: hidden; }
-        .bar-fill { height: 100%; background: #00ff41; transition: width 0.5s; }
-        .confirmation { font-size: 0.8em; opacity: 0.8; margin-top: 10px; padding: 8px; background: #0a0a0a; border-radius: 4px; }
-        .confirmation a { color: #00ff41; text-decoration: none; }
-        .polymarket-section { background: #000; padding: 20px; border-top: 2px solid #00ff41; }
-        .poly-embed { margin: 15px 0; border: 1px solid #00ff41; border-radius: 8px; overflow: hidden; }
-        .analysis { background: #0a0a0a; border: 1px solid #00ff41; border-radius: 8px; padding: 15px; margin: 15px 0; font-size: 0.9em; line-height: 1.8; }
-        .recommendation { padding: 10px 20px; background: #00ff41; color: #000; font-weight: bold; border-radius: 6px; margin: 15px 0; display: inline-block; animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
-        .loading { text-align: center; padding: 100px 20px; font-size: 1.5em; }
-        @media (max-width: 768px) { .games-grid { grid-template-columns: 1fr; } .matchup { grid-template-columns: 1fr; gap: 30px; } .vs { transform: rotate(90deg); } }
+        .goalie-name { font-weight: 600; color: #fff; font-size: 0.95em; }
+        .goalie-number { color: #888; font-size: 0.85em; }
+        .status { display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 0.75em; font-weight: 600; margin-top: 4px; letter-spacing: 0.5px; }
+        .status.CONFIRMED { background: #27ae60; color: #fff; }
+        .status.PROBABLE { background: #f39c12; color: #fff; }
+        .status.LIKELY { background: #3498db; color: #fff; }
+        .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px; }
+        .stat { background: #0a0a0a; border: 1px solid #1a1a1a; padding: 8px; border-radius: 6px; text-align: center; }
+        .stat-label { font-size: 0.75em; color: #666; text-transform: uppercase; }
+        .stat-value { font-weight: 600; color: #fff; margin-top: 2px; font-size: 0.95em; }
+        .proj-saves-bar { margin-top: 12px; }
+        .proj-label { font-size: 0.8em; color: #888; margin-bottom: 6px; display: flex; justify-content: space-between; }
+        .bar { height: 6px; background: #1a1a1a; border-radius: 3px; overflow: hidden; }
+        .bar-fill { height: 100%; background: linear-gradient(90deg, #e74c3c 0%, #c0392b 100%); transition: width 0.5s; border-radius: 3px; }
+        .win-prob-center { text-align: center; padding: 20px; background: #0f0f0f; border: 1px solid #2a2a2a; border-radius: 12px; margin: 20px 30px; }
+        .prob-title { font-size: 0.85em; color: #666; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; }
+        .prob-display { display: flex; justify-content: center; align-items: center; gap: 20px; }
+        .prob-team { text-align: center; }
+        .prob-value { font-size: 2.2em; font-weight: 700; color: #e74c3c; }
+        .prob-bar { width: 100%; height: 8px; background: #1a1a1a; border-radius: 4px; margin-top: 15px; overflow: hidden; display: flex; }
+        .prob-fill-away { background: #3498db; transition: width 0.5s; }
+        .prob-fill-home { background: #e74c3c; transition: width 0.5s; }
+        .confirmation { font-size: 0.8em; color: #666; margin-top: 10px; padding: 10px; background: #0a0a0a; border-radius: 6px; border-left: 3px solid #e74c3c; }
+        .confirmation a { color: #e74c3c; text-decoration: none; }
+        .polymarket-section { background: #0f0f0f; padding: 25px; border-top: 1px solid #2a2a2a; }
+        .section-title { font-size: 1.2em; font-weight: 600; text-align: center; margin-bottom: 20px; color: #e74c3c; letter-spacing: 0.5px; }
+        .poly-embed { margin: 20px 0; border: 1px solid #2a2a2a; border-radius: 12px; overflow: hidden; }
+        .analysis { background: #0a0a0a; border: 1px solid #2a2a2a; border-radius: 10px; padding: 18px; margin: 15px 0; font-size: 0.95em; line-height: 1.8; color: #bbb; }
+        .recommendation { padding: 12px 24px; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: #fff; font-weight: 600; border-radius: 8px; margin: 15px 0; display: inline-block; animation: pulse 2s infinite; letter-spacing: 0.5px; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.85; } }
+        .loading { text-align: center; padding: 100px 20px; font-size: 1.5em; color: #666; }
+        @media (max-width: 768px) { .games-grid { grid-template-columns: 1fr; } .matchup { grid-template-columns: 1fr; gap: 20px; } .vs { transform: rotate(90deg); } }
     </style>
 </head>
 <body>
-    <div class="header"><h1>🏒 PUCK PROPHET</h1></div>
-    <div class="container"><div class="games-grid" id="games"><div class="loading">Loading...</div></div></div>
+    <div class="header">
+        <h1>🏒 PUCK PROPHET</h1>
+        <div class="subtitle">AI-Powered NHL Betting Intelligence</div>
+    </div>
+    <div class="container">
+        <div class="games-grid" id="games"><div class="loading">Loading games...</div></div>
+    </div>
 
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
@@ -71,92 +93,100 @@
             const data = snapshot.val() || {}, games = data.games || [];
             document.getElementById('games').innerHTML = games.length === 0 ? '<div class="loading">No games scheduled</div>' : games.map(g => `
                 <div class="game-card">
-                    <div class="game-header">${g.gameDate} ${g.gameTime} - ${g.venue}</div>
+                    <div class="game-header">
+                        <div class="game-date">${formatDate(g.gameDate)} ${g.gameTime}</div>
+                        <div class="venue">${g.venue}</div>
+                    </div>
                     <div class="matchup">
                         <div class="team">
                             <div class="team-logo"><img src="${g.away.teamLogo}" alt="${g.away.teamAbbrev}"></div>
-                            <h3>${g.away.teamAbbrev}</h3>
-                            <div class="goalie-card">
+                            <div class="team-name">${g.away.teamAbbrev}</div>
+                            <div class="goalie-section">
                                 <div class="goalie-header">
                                     <div class="goalie-headshot"><img src="${g.away.goalie.headshot}" alt="${g.away.goalie.name}"></div>
-                                    <div>
-                                        <h4>${g.away.goalie.name} #${g.away.goalie.number}</h4>
+                                    <div style="flex:1; text-align:left;">
+                                        <div class="goalie-name">${g.away.goalie.name}</div>
+                                        <div class="goalie-number">#${g.away.goalie.number}</div>
                                         <span class="status ${g.away.goalie.status}">${g.away.goalie.status}</span>
                                     </div>
                                 </div>
-                                <div class="stats">
-                                    <div class="stat"><div style="opacity:0.7;">Record</div><strong>${g.away.goalie.stats.record}</strong></div>
-                                    <div class="stat"><div style="opacity:0.7;">GAA</div><strong>${g.away.goalie.stats.gaa.toFixed(2)}</strong></div>
-                                    <div class="stat"><div style="opacity:0.7;">SV%</div><strong>${g.away.goalie.stats.savePct.toFixed(3)}</strong></div>
-                                    <div class="stat"><div style="opacity:0.7;">SO</div><strong>${g.away.goalie.stats.shutouts}</strong></div>
+                                <div class="stats-row">
+                                    <div class="stat"><div class="stat-label">W-L-OTL</div><div class="stat-value">${g.away.goalie.stats.record}</div></div>
+                                    <div class="stat"><div class="stat-label">GAA</div><div class="stat-value">${g.away.goalie.stats.gaa.toFixed(2)}</div></div>
+                                    <div class="stat"><div class="stat-label">SV%</div><div class="stat-value">${g.away.goalie.stats.savePct.toFixed(3)}</div></div>
+                                    <div class="stat"><div class="stat-label">SO</div><div class="stat-value">${g.away.goalie.stats.shutouts}</div></div>
+                                </div>
+                                <div class="proj-saves-bar">
+                                    <div class="proj-label"><span>Projected Saves</span><strong>${g.away.goalie.stats.projSaves}</strong></div>
+                                    <div class="bar"><div class="bar-fill" style="width:${(g.away.goalie.stats.projSaves/40)*100}%"></div></div>
                                 </div>
                                 ${g.away.goalie.confirmationText || g.away.goalie.confirmationTweet ? `
-                                    <div class="confirmation">
-                                        ${g.away.goalie.confirmationText || 'Confirmed'}
-                                        ${g.away.goalie.confirmationTweet ? ` <a href="${g.away.goalie.confirmationTweet}" target="_blank">🔗</a>` : ''}
-                                    </div>
+                                    <div class="confirmation">${g.away.goalie.confirmationText || 'Confirmed'} ${g.away.goalie.confirmationTweet ? `<a href="${g.away.goalie.confirmationTweet}" target="_blank">🔗</a>` : ''}</div>
                                 ` : ''}
                             </div>
                         </div>
                         <div class="vs">@</div>
                         <div class="team">
                             <div class="team-logo"><img src="${g.home.teamLogo}" alt="${g.home.teamAbbrev}"></div>
-                            <h3>${g.home.teamAbbrev}</h3>
-                            <div class="goalie-card">
+                            <div class="team-name">${g.home.teamAbbrev}</div>
+                            <div class="goalie-section">
                                 <div class="goalie-header">
                                     <div class="goalie-headshot"><img src="${g.home.goalie.headshot}" alt="${g.home.goalie.name}"></div>
-                                    <div>
-                                        <h4>${g.home.goalie.name} #${g.home.goalie.number}</h4>
+                                    <div style="flex:1; text-align:left;">
+                                        <div class="goalie-name">${g.home.goalie.name}</div>
+                                        <div class="goalie-number">#${g.home.goalie.number}</div>
                                         <span class="status ${g.home.goalie.status}">${g.home.goalie.status}</span>
                                     </div>
                                 </div>
-                                <div class="stats">
-                                    <div class="stat"><div style="opacity:0.7;">Record</div><strong>${g.home.goalie.stats.record}</strong></div>
-                                    <div class="stat"><div style="opacity:0.7;">GAA</div><strong>${g.home.goalie.stats.gaa.toFixed(2)}</strong></div>
-                                    <div class="stat"><div style="opacity:0.7;">SV%</div><strong>${g.home.goalie.stats.savePct.toFixed(3)}</strong></div>
-                                    <div class="stat"><div style="opacity:0.7;">SO</div><strong>${g.home.goalie.stats.shutouts}</strong></div>
+                                <div class="stats-row">
+                                    <div class="stat"><div class="stat-label">W-L-OTL</div><div class="stat-value">${g.home.goalie.stats.record}</div></div>
+                                    <div class="stat"><div class="stat-label">GAA</div><div class="stat-value">${g.home.goalie.stats.gaa.toFixed(2)}</div></div>
+                                    <div class="stat"><div class="stat-label">SV%</div><div class="stat-value">${g.home.goalie.stats.savePct.toFixed(3)}</div></div>
+                                    <div class="stat"><div class="stat-label">SO</div><div class="stat-value">${g.home.goalie.stats.shutouts}</div></div>
+                                </div>
+                                <div class="proj-saves-bar">
+                                    <div class="proj-label"><span>Projected Saves</span><strong>${g.home.goalie.stats.projSaves}</strong></div>
+                                    <div class="bar"><div class="bar-fill" style="width:${(g.home.goalie.stats.projSaves/40)*100}%"></div></div>
                                 </div>
                                 ${g.home.goalie.confirmationText || g.home.goalie.confirmationTweet ? `
-                                    <div class="confirmation">
-                                        ${g.home.goalie.confirmationText || 'Confirmed'}
-                                        ${g.home.goalie.confirmationTweet ? ` <a href="${g.home.goalie.confirmationTweet}" target="_blank">🔗</a>` : ''}
-                                    </div>
+                                    <div class="confirmation">${g.home.goalie.confirmationText || 'Confirmed'} ${g.home.goalie.confirmationTweet ? `<a href="${g.home.goalie.confirmationTweet}" target="_blank">🔗</a>` : ''}</div>
                                 ` : ''}
                             </div>
                         </div>
                     </div>
-                    <div class="prob-bars">
-                        <h3 style="margin-bottom: 15px; text-align: center; color: #00ff41; border-bottom: 1px solid #00ff41; padding-bottom: 10px;">📊 PROJECTIONS</h3>
-                        <div class="prob-bar">
-                            <div class="prob-label"><span>${g.away.teamAbbrev} Win Probability</span><strong>${g.away.goalie.stats.winProb}%</strong></div>
-                            <div class="bar"><div class="bar-fill" style="width:${g.away.goalie.stats.winProb}%"></div></div>
+                    <div class="win-prob-center">
+                        <div class="prob-title">Win Probability</div>
+                        <div class="prob-display">
+                            <div class="prob-team">
+                                <div style="font-size:0.9em;color:#888;margin-bottom:5px;">${g.away.teamAbbrev}</div>
+                                <div class="prob-value">${g.away.goalie.stats.winProb}%</div>
+                            </div>
+                            <div style="font-size:1.5em;opacity:0.3;">vs</div>
+                            <div class="prob-team">
+                                <div style="font-size:0.9em;color:#888;margin-bottom:5px;">${g.home.teamAbbrev}</div>
+                                <div class="prob-value">${g.home.goalie.stats.winProb}%</div>
+                            </div>
                         </div>
                         <div class="prob-bar">
-                            <div class="prob-label"><span>${g.away.goalie.name} Projected Saves</span><strong>${g.away.goalie.stats.projSaves}</strong></div>
-                            <div class="bar"><div class="bar-fill" style="width:${(g.away.goalie.stats.projSaves/40)*100}%"></div></div>
-                        </div>
-                        <div class="prob-bar">
-                            <div class="prob-label"><span>${g.home.teamAbbrev} Win Probability</span><strong>${g.home.goalie.stats.winProb}%</strong></div>
-                            <div class="bar"><div class="bar-fill" style="width:${g.home.goalie.stats.winProb}%"></div></div>
-                        </div>
-                        <div class="prob-bar">
-                            <div class="prob-label"><span>${g.home.goalie.name} Projected Saves</span><strong>${g.home.goalie.stats.projSaves}</strong></div>
-                            <div class="bar"><div class="bar-fill" style="width:${(g.home.goalie.stats.projSaves/40)*100}%"></div></div>
+                            <div class="prob-fill-away" style="width:${g.away.goalie.stats.winProb}%"></div>
+                            <div class="prob-fill-home" style="width:${g.home.goalie.stats.winProb}%"></div>
                         </div>
                     </div>
                     <div class="polymarket-section">
-                        <h3 style="margin-bottom: 15px; text-align: center; color: #00ff41; font-size: 1.2em;">🤖 PUCK PROPHET AGENT PREDICTION</h3>
-                        ${g.polymarket.marketId ? `
-                            <div class="poly-embed">
-                                <iframe title="polymarket-embed" src="https://embed.polymarket.com/market.html?market=${g.polymarket.marketId}&features=volume&theme=dark" width="100%" height="180" frameBorder="0"></iframe>
-                            </div>
-                        ` : ''}
+                        <div class="section-title">🤖 PUCK PROPHET AGENT PREDICTION</div>
+                        ${g.polymarket.marketId ? `<div class="poly-embed"><iframe title="polymarket" src="https://embed.polymarket.com/market.html?market=${g.polymarket.marketId}&features=volume&theme=dark" width="100%" height="180" frameBorder="0"></iframe></div>` : ''}
                         ${g.polymarket.analysis ? `<div class="analysis">${g.polymarket.analysis}</div>` : ''}
                         ${g.polymarket.recommendation ? `<div class="recommendation">${g.polymarket.recommendation}</div>` : ''}
                     </div>
                 </div>
             `).join('');
         });
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            const options = { weekday: 'short', month: 'short', day: 'numeric' };
+            return date.toLocaleDateString('en-US', options);
+        }
     </script>
 </body>
 </html>
